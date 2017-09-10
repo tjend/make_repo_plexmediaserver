@@ -1,0 +1,8 @@
+/.id_rsa
+/*.deb
+/*.spk
+/aptly
+/deb
+/gnupg
+/releases.json
+/repo_plexmediaserver
