@@ -25,8 +25,8 @@ fi
 echo 'getting the latest urls and checksums'
 URL_ARMv7=$(cat releases.json | jq '.nas.Synology.releases[] | select(.label == "ARMv7") | .url' | cut -d '"' -f 2)
 CHECKSUM_ARMv7=$(cat releases.json | jq '.nas.Synology.releases[] | select(.label == "ARMv7") | .checksum' | cut -d '"' -f 2)
-URL_AMD64=$(cat releases.json | jq '.computer.Linux.releases[] | select(.label | test("Debian.*64-bit"; "i")) | .url' | cut -d '"' -f 2)
-CHECKSUM_AMD64=$(cat releases.json | jq '.computer.Linux.releases[] | select(.label | test("Debian.*64-bit"; "i")) | .checksum' | cut -d '"' -f 2)
+URL_AMD64=$(cat releases.json | jq '.computer.Linux.releases[] | select(.url | test(".*_amd64.deb"; "i")) | .url' | cut -d '"' -f 2)
+CHECKSUM_AMD64=$(cat releases.json | jq '.computer.Linux.releases[] | select(.url | test(".*_amd64.deb"; "i")) | .checksum' | cut -d '"' -f 2)
 if [ "${URL_ARMv7}" == "" ] ||
    [ "${CHECKSUM_ARMv7}" == "" ] ||
    [ "${URL_AMD64}" == "" ] ||
