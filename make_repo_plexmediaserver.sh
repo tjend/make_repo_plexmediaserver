@@ -4,7 +4,7 @@
 
 echo 'getting latest releases page'
 RELEASES_PAGE="https://plex.tv/api/downloads/1.json"
-curl --silent "${RELEASES_PAGE}" > releases.json
+curl --location --silent "${RELEASES_PAGE}" > releases.json
 if [ $? -ne 0 ]; then
   echo "Failed to get the latest releases page!"
   exit 1;
@@ -12,7 +12,9 @@ fi
 
 echo 'getting the latest release version number'
 LATEST_VERSION_ARMv7=$(cat releases.json | jq '.nas.Synology.version' | cut -d '"' -f 2)
+echo "arm={$LATEST_VERSION_ARMv7}"
 LATEST_VERSION_AMD64=$(cat releases.json | jq '.computer.Linux.version' | cut -d '"' -f 2)
+echo "amd64={$LATEST_VERSION_AMD64}"
 if [ "${LATEST_VERSION_ARMv7}" == "" ]; then
   echo "Failed to get the latest release version number!"
   exit 1;
