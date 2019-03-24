@@ -25,10 +25,10 @@ if [ "${LATEST_VERSION_ARMv7}" != "${LATEST_VERSION_AMD64}" ]; then
 fi
 
 echo 'getting the latest urls and checksums'
-URL_ARMv7=$(cat releases.json | jq '.nas.Synology.releases[] | select(.label == "ARMv7") | .url' | cut -d '"' -f 2)
-CHECKSUM_ARMv7=$(cat releases.json | jq '.nas.Synology.releases[] | select(.label == "ARMv7") | .checksum' | cut -d '"' -f 2)
-URL_AMD64=$(cat releases.json | jq '.computer.Linux.releases[] | select(.url | test(".*_amd64.deb"; "i")) | .url' | cut -d '"' -f 2)
-CHECKSUM_AMD64=$(cat releases.json | jq '.computer.Linux.releases[] | select(.url | test(".*_amd64.deb"; "i")) | .checksum' | cut -d '"' -f 2)
+URL_ARMv7=$(cat releases.json | jq '.nas.Synology.releases[] | select(.build == "linux-armv7hf") | .url' | cut -d '"' -f 2)
+CHECKSUM_ARMv7=$(cat releases.json | jq '.nas.Synology.releases[] | select(.build == "linux-armv7hf") | .checksum' | cut -d '"' -f 2)
+URL_AMD64=$(cat releases.json | jq '.computer.Linux.releases[] | select(.build == "linux-x86_64") | select(.distro == "debian") | .url' | cut -d '"' -f 2)
+CHECKSUM_AMD64=$(cat releases.json | jq '.computer.Linux.releases[] | select(.build == "linux-x86_64") | select(.distro == "debian") | .checksum' | cut -d '"' -f 2)
 if [ "${URL_ARMv7}" == "" ] ||
    [ "${CHECKSUM_ARMv7}" == "" ] ||
    [ "${URL_AMD64}" == "" ] ||
