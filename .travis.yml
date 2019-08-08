@@ -6,7 +6,7 @@ addons:
       - fakeroot
 
 before_script:
-  - sudo apt-key adv --keyserver pool.sks-keyservers.net --recv-keys ED75B5A4483DA07C
+  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ED75B5A4483DA07C
   - echo "deb http://repo.aptly.info/ squeeze main" | sudo tee -a /etc/apt/sources.list.d/aptly.list > /dev/null
   - sudo apt-get update -qq
   - sudo apt-get install aptly -qq -y
